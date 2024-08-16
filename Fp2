@@ -1,0 +1,32 @@
+const tasks = [
+  { id: 1, title: "Task 1", status: "todo" },
+  { id: 2, title: "Task 2", status: "inProgress" },
+  { id: 3, title: "Task 3", status: "completed" },
+  { id: 4, title: "Task 4", status: "todo" },
+]
+
+const selectStatus = document.querySelector('#status')
+
+
+const printTasks = (status) => {
+  const result = document.querySelector('#result')
+
+  const filterStatus = status === "all" ? tasks : tasks.filter(task => task.status === status)
+
+  const allTasks = filterStatus.map(task => `
+  <li>
+  <strong>ID: </strong>${task.id}<br>
+   <strong>Title: </strong>${task.title}<br>
+    <strong>Status: </strong>${task.status}<br>
+  </li>
+  <hr>
+  `)
+  result.innerHTML = allTasks.join("")
+}
+
+printTasks("all");
+
+selectStatus.addEventListener('change', function() {
+  const value = selectStatus.value;
+  printTasks(value);
+})
